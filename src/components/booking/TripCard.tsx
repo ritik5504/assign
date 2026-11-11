@@ -158,3 +158,4 @@ export function TripCard({ trip }: TripCardProps) {
     </div>
   );
 }
+

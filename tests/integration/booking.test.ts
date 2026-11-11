@@ -214,3 +214,4 @@ describe("Integration: Booking Engine, Concurrency & Data Integrity", () => {
     ).rejects.toThrow("FORBIDDEN_BOOKING_ACCESS");
   });
 });
+

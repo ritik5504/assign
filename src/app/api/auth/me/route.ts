@@ -12,3 +12,4 @@ export async function GET() {
     data: { user: session },
   });
 }
+

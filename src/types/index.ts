@@ -58,3 +58,4 @@ export interface SeatWithStatus {
   lockedUntil?: string | null;
   fare: number;
 }
+

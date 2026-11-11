@@ -72,3 +72,4 @@ export async function PATCH(
     return NextResponse.json({ success: false, error: "Failed to update trip" }, { status: 500 });
   }
 }
+

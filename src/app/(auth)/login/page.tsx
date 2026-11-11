@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Bus, KeyRound, Mail, AlertCircle, ArrowRight } from "lucide-react";
+import { Bus, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -62,7 +62,7 @@ function LoginContent() {
           <div className="h-10 w-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shadow-md shadow-emerald-700/20">
             <Bus className="h-5 w-5" />
           </div>
-          <span className="text-2xl font-black tracking-tight text-slate-900">SwiftTransit</span>
+          <span className="text-2xl font-black tracking-tight text-slate-900">SwiftTransit India</span>
         </Link>
         <h2 className="mt-4 text-xl font-bold tracking-tight text-slate-900">
           Sign in to your account
@@ -70,7 +70,7 @@ function LoginContent() {
         <p className="text-xs text-slate-500 mt-1">
           Or{" "}
           <Link href="/register" className="font-semibold text-emerald-600 hover:underline">
-            create a new passenger profile
+            register as a new passenger
           </Link>
         </p>
       </div>
@@ -91,7 +91,7 @@ function LoginContent() {
                 <Input
                   type="email"
                   required
-                  placeholder="name@example.com"
+                  placeholder="aarav@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -129,7 +129,7 @@ function LoginContent() {
                 className="text-[11px] font-bold"
                 onClick={() => fillCredentials("admin@busbooking.com", "Admin@123")}
               >
-                Super Admin
+                Rohan (Admin)
               </Button>
               <Button
                 type="button"
@@ -138,16 +138,16 @@ function LoginContent() {
                 className="text-[11px] font-bold"
                 onClick={() => fillCredentials("operator1@busbooking.com", "Operator@123")}
               >
-                Operator
+                Vikram (Operator)
               </Button>
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
                 className="text-[11px] font-bold"
-                onClick={() => fillCredentials("john@example.com", "Customer@123")}
+                onClick={() => fillCredentials("aarav@example.com", "Customer@123")}
               >
-                Customer
+                Aarav (Customer)
               </Button>
             </div>
           </div>

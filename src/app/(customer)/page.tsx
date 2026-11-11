@@ -21,33 +21,33 @@ import {
 import { Button } from "@/components/ui/button";
 
 const POPULAR_ROUTES = [
-  { source: "New York", destination: "Boston", price: 48, time: "4h 30m", busType: "Luxury Volvo" },
-  { source: "Los Angeles", destination: "San Francisco", price: 75, time: "7h 00m", busType: "Royal Sleeper" },
-  { source: "Seattle", destination: "Portland", price: 35, time: "3h 30m", busType: "Sound Runner" },
-  { source: "Miami", destination: "Orlando", price: 55, time: "3h 50m", busType: "Sunshine Dreamer" },
+  { source: "Delhi", destination: "Jaipur", price: "₹650", time: "5h 00m", busType: "Garuda Volvo 9600" },
+  { source: "Mumbai", destination: "Pune", price: "₹450", time: "3h 00m", busType: "Royal Multi-Axle" },
+  { source: "Bengaluru", destination: "Chennai", price: "₹750", time: "6h 00m", busType: "Airavat Club Class" },
+  { source: "Mumbai", destination: "Goa", price: "₹1,450", time: "11h 00m", busType: "Grand AC Sleeper" },
 ];
 
 const CITIES = [
-  "New York",
-  "Boston",
-  "Los Angeles",
-  "San Francisco",
-  "Seattle",
-  "Portland",
-  "Chicago",
-  "Detroit",
-  "Washington DC",
-  "Philadelphia",
-  "Dallas",
-  "Houston",
-  "Miami",
-  "Orlando",
+  "Delhi",
+  "Jaipur",
+  "Bengaluru",
+  "Chennai",
+  "Mumbai",
+  "Pune",
+  "Hyderabad",
+  "Vijayawada",
+  "Goa",
+  "Ahmedabad",
+  "Surat",
+  "Manali",
+  "Gurugram",
+  "Navi Mumbai",
 ];
 
 export default function HomePage() {
   const router = useRouter();
-  const [source, setSource] = useState("New York");
-  const [destination, setDestination] = useState("Boston");
+  const [source, setSource] = useState("Delhi");
+  const [destination, setDestination] = useState("Jaipur");
   const [date, setDate] = useState(() => {
     const today = new Date();
     return today.toISOString().split("T")[0];
@@ -79,14 +79,14 @@ export default function HomePage() {
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-950/80 border border-emerald-500/30 px-3.5 py-1 text-xs font-semibold text-emerald-400">
               <Sparkles className="h-3.5 w-3.5" />
-              <span>Next-Generation Intercity Mobility</span>
+              <span>India&apos;s Premium Intercity Smart Bus Network</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
-              Smarter, Faster, <br className="hidden sm:inline" />
-              <span className="text-emerald-400">Stress-Free Bus Travel</span>
+              Comfortable, Safe, <br className="hidden sm:inline" />
+              <span className="text-emerald-400">Intercity Bus Travel across India</span>
             </h1>
             <p className="text-base sm:text-lg text-slate-300 font-normal">
-              Book guaranteed seats in real time. Instant PNR confirmation, live tracking, and guaranteed refund policies.
+              Book live verified seats with instant PNR generation. Zero double-booking guarantee and up to 90% instant policy refunds.
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export default function HomePage() {
               <div className="md:col-span-4 space-y-1.5 text-left">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                   <MapPin className="h-3.5 w-3.5 text-emerald-600" />
-                  Departure City
+                  Leaving From
                 </label>
                 <select
                   value={source}
@@ -128,7 +128,7 @@ export default function HomePage() {
               <div className="md:col-span-4 space-y-1.5 text-left">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                   <MapPin className="h-3.5 w-3.5 text-emerald-600" />
-                  Arrival City
+                  Going To
                 </label>
                 <select
                   value={destination}
@@ -165,7 +165,7 @@ export default function HomePage() {
                   className="w-full h-12 font-bold text-base gap-2 shadow-lg shadow-emerald-600/30"
                 >
                   <Search className="h-5 w-5" />
-                  Search Available Buses
+                  Search Buses in India
                 </Button>
               </div>
             </form>
@@ -179,7 +179,7 @@ export default function HomePage() {
           <div>
             <div className="flex items-center gap-2 text-emerald-600 font-semibold text-xs tracking-wider uppercase">
               <TrendingUp className="h-4 w-4" />
-              <span>Trending Connections</span>
+              <span>Trending Indian Corridors</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
               Popular Intercity Routes
@@ -189,7 +189,7 @@ export default function HomePage() {
             href="/search"
             className="text-sm font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"
           >
-            Browse all 10+ active routes <ArrowRight className="h-4 w-4" />
+            Browse all 10+ highway routes <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
@@ -211,14 +211,14 @@ export default function HomePage() {
                 </h3>
                 <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
                   <Clock className="h-3.5 w-3.5 text-slate-400" />
-                  Est. {route.time} journey
+                  Approx. {route.time}
                 </p>
               </div>
 
               <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-slate-400">Fares from</span>
-                  <p className="text-xl font-black text-slate-900">${route.price}</p>
+                  <p className="text-xl font-black text-slate-900">{route.price}</p>
                 </div>
                 <div className="h-8 w-8 rounded-full bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white flex items-center justify-center transition-colors">
                   <ArrowRight className="h-4 w-4" />
@@ -234,10 +234,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Engineered for Ultimate Travel Comfort
+              Engineered for Ultimate Travel Comfort on Indian Highways
             </h2>
             <p className="text-sm text-slate-600 mt-2">
-              Every vehicle in our certified partner network meets rigorous comfort, security, and hygiene benchmarks.
+              Every Volvo, BharatBenz, and Scania coach in our partner fleet satisfies stringent hygiene, safety, and timing audits.
             </p>
           </div>
 
@@ -246,9 +246,9 @@ export default function HomePage() {
               <div className="h-12 w-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
                 <Wifi className="h-6 w-6" />
               </div>
-              <h3 className="font-bold text-base text-slate-900">Gigabit WiFi & Power</h3>
+              <h3 className="font-bold text-base text-slate-900">WiFi & Fast Charging</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Stay plugged-in and productive with individual 110V AC power sockets and high-speed satellite Wi-Fi.
+                Stay connected with onboard WiFi and personal 230V sockets and USB charging ports on every berth and seat.
               </p>
             </div>
 
@@ -256,9 +256,9 @@ export default function HomePage() {
               <div className="h-12 w-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
                 <Armchair className="h-6 w-6" />
               </div>
-              <h3 className="font-bold text-base text-slate-900">Ergonomic Berths & Recliners</h3>
+              <h3 className="font-bold text-base text-slate-900">AC Sleepers & Pushback Seats</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Choose between extra-legroom leather recliners or private full-flat sleeper berths with fresh linen.
+                Choose between individual flat sleeper berths with clean linen or ergonomic calf-rest recliners.
               </p>
             </div>
 
@@ -266,9 +266,9 @@ export default function HomePage() {
               <div className="h-12 w-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
                 <ShieldCheck className="h-6 w-6" />
               </div>
-              <h3 className="font-bold text-base text-slate-900">Guaranteed Seat Locks</h3>
+              <h3 className="font-bold text-base text-slate-900">Zero Double-Booking</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Our 5-minute atomic database locking engine guarantees no double bookings or surprise cancellations.
+                Our 5-minute atomic database locking engine guarantees you never lose your selected seat to another passenger.
               </p>
             </div>
 
@@ -276,9 +276,9 @@ export default function HomePage() {
               <div className="h-12 w-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
                 <Clock className="h-6 w-6" />
               </div>
-              <h3 className="font-bold text-base text-slate-900">Tiered Instant Refunds</h3>
+              <h3 className="font-bold text-base text-slate-900">Instant UPI & Policy Refunds</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Plans changed? Cancel effortlessly from your portal and receive up to 90% instant refund based on departure.
+                Plans changed? Cancel seamlessly and receive up to 90% instant simulated refund credited automatically.
               </p>
             </div>
           </div>
@@ -290,25 +290,25 @@ export default function HomePage() {
         <div className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 overflow-hidden relative">
           <div className="relative z-10 max-w-2xl space-y-6">
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
-              Why 100,000+ passengers rely on SwiftTransit every month
+              Why Indian travelers trust SwiftTransit every journey
             </h2>
             <div className="space-y-4 text-sm text-slate-300">
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-white">Zero Double-Bookings:</strong> FAANG-grade transactional concurrency guarantees seat availability truth.
+                  <strong className="text-white">Live Operations Mirror:</strong> Passenger bookings reflect instantaneously on the operator console and driver manifest.
                 </span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-white">Live Operations Link:</strong> Changes made on passenger portal reflect in real time on the fleet operator dashboard.
+                  <strong className="text-white">Transparent Rupee Pricing:</strong> Fixed fares in INR (₹) inclusive of GST and highway toll surcharges.
                 </span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-white">Transparent Pricing:</strong> What you see is what you pay. No hidden station fees or surge penalties.
+                  <strong className="text-white">Safety First:</strong> Live GPS tracking, verified driver rosters, and 24x7 highway helpline.
                 </span>
               </div>
             </div>

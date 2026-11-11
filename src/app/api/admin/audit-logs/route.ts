@@ -23,3 +23,4 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: false, error: "Failed to fetch audit logs" }, { status: 403 });
   }
 }
+

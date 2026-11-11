@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("🌱 Starting database seeding...");
+  console.log("🌱 Starting Indian Transit database seeding...");
 
   // Clear existing records in proper order
   await prisma.auditLog.deleteMany();
@@ -28,85 +28,85 @@ async function main() {
   const operatorPasswordHash = await bcrypt.hash("Operator@123", 10);
   const customerPasswordHash = await bcrypt.hash("Customer@123", 10);
 
-  // 2. Users
+  // 2. Indian Users
   const admin = await prisma.user.create({
     data: {
-      name: "Super Admin",
+      name: "Rohan Sharma",
       email: "admin@busbooking.com",
       passwordHash: adminPasswordHash,
-      phone: "+1-555-0100",
+      phone: "+91 98111 22334",
       role: Role.ADMIN,
     },
   });
 
   const operatorUser1 = await prisma.user.create({
     data: {
-      name: "Apex Express Dispatcher",
+      name: "Vikram Malhotra",
       email: "operator1@busbooking.com",
       passwordHash: operatorPasswordHash,
-      phone: "+1-555-0101",
+      phone: "+91 98222 33445",
       role: Role.OPERATOR,
     },
   });
 
   const operatorUser2 = await prisma.user.create({
     data: {
-      name: "BlueSky Lines Dispatcher",
+      name: "Pooja Verma",
       email: "operator2@busbooking.com",
       passwordHash: operatorPasswordHash,
-      phone: "+1-555-0102",
+      phone: "+91 98333 44556",
       role: Role.OPERATOR,
     },
   });
 
   const customer1 = await prisma.user.create({
     data: {
-      name: "John Doe",
-      email: "john@example.com",
+      name: "Aarav Patel",
+      email: "aarav@example.com",
       passwordHash: customerPasswordHash,
-      phone: "+1-555-0201",
+      phone: "+91 98765 43210",
       role: Role.CUSTOMER,
     },
   });
 
   const customer2 = await prisma.user.create({
     data: {
-      name: "Jane Smith",
-      email: "jane@example.com",
+      name: "Ananya Iyer",
+      email: "ananya@example.com",
       passwordHash: customerPasswordHash,
-      phone: "+1-555-0202",
+      phone: "+91 98765 43211",
       role: Role.CUSTOMER,
     },
   });
 
-  console.log("✅ Seeded Users: Admin, 2 Operators, 2 Customers");
+  console.log("✅ Seeded Indian Users: Rohan Sharma (Admin), Vikram & Pooja (Operators), Aarav & Ananya (Customers)");
 
-  // 3. Operators
+  // 3. Indian Bus Operators
   const operator1 = await prisma.operator.create({
     data: {
-      name: "Apex Express Mobility",
-      contactDetails: "support@apexexpress.com | 1-800-555-APEX",
+      name: "IntrCity SmartBus Mobility",
+      contactDetails: "care@intrcity.com | 1800-102-8632",
       status: OperatorStatus.ACTIVE,
     },
   });
 
   const operator2 = await prisma.operator.create({
     data: {
-      name: "BlueSky Intercity Lines",
-      contactDetails: "info@blueskylines.com | 1-800-555-BLUE",
+      name: "Zingbus Intercity Express",
+      contactDetails: "support@zingbus.com | 1800-120-0082",
       status: OperatorStatus.ACTIVE,
     },
   });
 
   const operator3 = await prisma.operator.create({
     data: {
-      name: "Voyager Premium Coaches",
-      contactDetails: "concierge@voyagercoaches.com | 1-800-555-VOY",
+      name: "VRL Travels & Logistics",
+      contactDetails: "helpdesk@vrltravels.com | 080-26992666",
       status: OperatorStatus.ACTIVE,
     },
   });
 
-  console.log("✅ Seeded 3 Bus Operators");
+  console.log("✅ Seeded 3 Leading Indian Bus Operators");
 
   // 4. Cancellation Policies
   await prisma.cancellationPolicy.createMany({
@@ -119,87 +119,87 @@ async function main() {
   });
   console.log("✅ Seeded Cancellation Policies");
 
-  // 5. Buses (10+ buses with different configurations)
+  // 5. Buses (10+ Indian buses with realistic state registrations)
   const busConfigs = [
     {
       operatorId: operator1.id,
-      registrationNumber: "US-NY-7821",
-      busName: "Apex Falcon Express",
+      registrationNumber: "DL-01-AB-1234",
+      busName: "IntrCity Garuda Volvo 9600",
       busType: BusType.LUXURY_VOLVO,
       totalSeats: 36,
-      amenities: JSON.stringify(["High-Speed WiFi", "AC", "Power Outlets", "Reclining Seats", "Snacks & Water", "Live GPS"]),
+      amenities: JSON.stringify(["High-Speed WiFi", "AC", "USB Power Socket", "Reclining Pushback Seats", "Mineral Water", "Live GPS Tracking"]),
     },
     {
       operatorId: operator1.id,
-      registrationNumber: "US-NY-7822",
-      busName: "Apex Royal Sleeper",
+      registrationNumber: "DL-01-AB-1235",
+      busName: "IntrCity Smart Sleeper BharatBenz",
       busType: BusType.AC_SLEEPER,
       totalSeats: 30,
-      amenities: JSON.stringify(["WiFi", "AC", "Personal Blanket", "Reading Light", "Charging Port", "Pillow"]),
+      amenities: JSON.stringify(["WiFi", "Air Conditioned", "Sanitized Blanket & Pillow", "Reading Lamp", "Charging Socket", "Curtains"]),
     },
     {
       operatorId: operator1.id,
-      registrationNumber: "US-MA-4410",
-      busName: "Apex Coastal Cruiser",
+      registrationNumber: "KA-01-MJ-9901",
+      busName: "IntrCity Airavat Club Class",
       busType: BusType.AC_SEATER,
       totalSeats: 40,
-      amenities: JSON.stringify(["WiFi", "Air Conditioning", "USB Charging", "Onboard Restroom"]),
+      amenities: JSON.stringify(["WiFi", "AC", "USB Charging", "Overhead Luggage", "CCTV Surveillance"]),
     },
     {
       operatorId: operator2.id,
-      registrationNumber: "US-CA-9901",
-      busName: "BlueSky Pacific Glider",
+      registrationNumber: "MH-12-PQ-5678",
+      busName: "Zingbus Royal Multi-Axle Volvo",
       busType: BusType.LUXURY_VOLVO,
       totalSeats: 36,
-      amenities: JSON.stringify(["WiFi", "Panoramic Windows", "Leather Seats", "Complimentary Beverages", "Restroom"]),
+      amenities: JSON.stringify(["Free WiFi", "Panoramic Windows", "Leather Recliners", "Snacks & Water Bottle", "Emergency Hammer"]),
     },
     {
       operatorId: operator2.id,
-      registrationNumber: "US-CA-9902",
-      busName: "BlueSky Star Sleeper",
+      registrationNumber: "MH-14-BT-5566",
+      busName: "Zingbus Electric Intercity Cruiser",
       busType: BusType.AC_SLEEPER,
       totalSeats: 30,
-      amenities: JSON.stringify(["Air Conditioning", "Sleeper Berths", "Privacy Curtains", "WiFi", "Emergency Kit"]),
+      amenities: JSON.stringify(["Zero-Emission EV", "AC", "Spacious Berths", "Privacy Screens", "Individual Charging", "Water Bottle"]),
     },
     {
       operatorId: operator2.id,
-      registrationNumber: "US-WA-1234",
-      busName: "BlueSky Sound Runner",
+      registrationNumber: "UP-16-BT-7788",
+      busName: "Zingbus Highway Star",
       busType: BusType.NON_AC_SEATER,
       totalSeats: 40,
-      amenities: JSON.stringify(["Comfort Seats", "Luggage Storage", "First Aid Box"]),
+      amenities: JSON.stringify(["Comfort Pushback Seats", "Luggage Storage", "First Aid Kit"]),
     },
     {
       operatorId: operator3.id,
-      registrationNumber: "US-TX-5511",
-      busName: "Voyager Lone Star",
+      registrationNumber: "KA-05-FA-4321",
+      busName: "VRL I-Shift Super Luxury Scania",
       busType: BusType.LUXURY_VOLVO,
       totalSeats: 36,
-      amenities: JSON.stringify(["Ultra WiFi", "Individual Screens", "AC", "Leather Recliners", "Snack Bar"]),
+      amenities: JSON.stringify(["Satellite WiFi", "Personal Entertainment", "AC", "Calf Rest", "Mineral Water"]),
     },
     {
       operatorId: operator3.id,
-      registrationNumber: "US-FL-3301",
-      busName: "Voyager Sunshine Dreamer",
+      registrationNumber: "KA-51-EX-6622",
+      busName: "VRL Southern Dream Sleeper",
       busType: BusType.AC_SLEEPER,
       totalSeats: 30,
-      amenities: JSON.stringify(["AC", "Luxury Linen", "Soft Lighting", "Reading Lamps", "Complimentary Water"]),
+      amenities: JSON.stringify(["AC", "Fresh Bedroll", "Soft Night Lamp", "Shoe Bag", "Mineral Water"]),
     },
     {
       operatorId: operator3.id,
-      registrationNumber: "US-IL-8820",
-      busName: "Voyager Midwest Shuttle",
+      registrationNumber: "GJ-01-XY-3344",
+      busName: "VRL Western Deluxe Express",
       busType: BusType.AC_SEATER,
       totalSeats: 40,
-      amenities: JSON.stringify(["WiFi", "AC", "Reclining Seats", "Overhead Storage"]),
+      amenities: JSON.stringify(["WiFi", "AC", "Pushback Ergonomic Seats", "Clean Interiors"]),
     },
     {
       operatorId: operator1.id,
-      registrationNumber: "US-PA-6677",
-      busName: "Apex Liberty Connect",
+      registrationNumber: "RJ-14-PC-2345",
+      busName: "IntrCity Marwar Classic",
       busType: BusType.NON_AC_SLEEPER,
       totalSeats: 30,
-      amenities: JSON.stringify(["Sleeper Berths", "Window Curtains", "Luggage Rack"]),
+      amenities: JSON.stringify(["Spacious Sleeper Berths", "Window Curtains", "Overhead Rack"]),
     },
   ];
 
@@ -221,7 +221,7 @@ async function main() {
     // Create seats according to layout
     const seatData = [];
     if (b.busType === BusType.AC_SLEEPER || b.busType === BusType.NON_AC_SLEEPER) {
-      // Sleeper Layout: 30 berths (10 rows x 3 columns: Left 1, Right 2). Lower berths (L1-L15) and Upper berths (U1-U15)
+      // Sleeper Layout: 30 berths (Lower L1-L15, Upper U1-U15)
       for (let r = 1; r <= 5; r++) {
         // Lower deck
         seatData.push({ busId: bus.id, seatNumber: `L${(r - 1) * 3 + 1}`, seatType: SeatType.WINDOW, row: r, column: 1 });
@@ -246,28 +246,28 @@ async function main() {
     await prisma.seat.createMany({ data: seatData });
   }
 
-  console.log(`✅ Seeded ${createdBuses.length} Buses with complete seat mappings`);
+  console.log(`✅ Seeded ${createdBuses.length} Indian Buses with full berth and seat mappings`);
 
-  // 6. Routes and Stops
+  // 6. Indian Stops and Terminals
   const stopsList = [
-    { name: "Port Authority Bus Terminal", city: "New York", address: "625 8th Ave, New York, NY 10018" },
-    { name: "Newark Penn Station", city: "Newark", address: "1 Raymond Plaza W, Newark, NJ 07102" },
-    { name: "South Station Terminal", city: "Boston", address: "700 Atlantic Ave, Boston, MA 02110" },
-    { name: "Hartford Union Station", city: "Hartford", address: "One Union Place, Hartford, CT 06103" },
-    { name: "Los Angeles Union Station", city: "Los Angeles", address: "800 N Alameda St, Los Angeles, CA 90012" },
-    { name: "Bakersfield Transit Center", city: "Bakersfield", address: "Fresno Ave & 8th St, Bakersfield, CA 93301" },
-    { name: "San Francisco Salesforce Transit", city: "San Francisco", address: "425 Mission St, San Francisco, CA 94105" },
-    { name: "Seattle King Street Station", city: "Seattle", address: "303 S Jackson St, Seattle, WA 98104" },
-    { name: "Tacoma Dome Station", city: "Tacoma", address: "505 E 25th St, Tacoma, WA 98421" },
-    { name: "Portland Union Station", city: "Portland", address: "800 NW 6th Ave, Portland, OR 97209" },
-    { name: "Chicago Union Station", city: "Chicago", address: "225 S Canal St, Chicago, IL 60606" },
-    { name: "Detroit Rosa Parks Transit", city: "Detroit", address: "360 Michigan Ave, Detroit, MI 48226" },
-    { name: "Washington Union Station", city: "Washington DC", address: "50 Massachusetts Ave NE, Washington, DC 20002" },
-    { name: "Philadelphia 30th Street", city: "Philadelphia", address: "2955 Market St, Philadelphia, PA 19104" },
-    { name: "Dallas Downtown Station", city: "Dallas", address: "2010 Levee St, Dallas, TX 75207" },
-    { name: "Houston Magnolia Transit", city: "Houston", address: "2121 San Jacinto St, Houston, TX 77002" },
-    { name: "Miami Central Station", city: "Miami", address: "3801 NW 21st St, Miami, FL 33142" },
-    { name: "Orlando LYNX Central", city: "Orlando", address: "455 N Garland Ave, Orlando, FL 32801" },
+    { name: "Kashmere Gate ISBT", city: "Delhi", address: "Inter State Bus Terminal, Kashmere Gate, New Delhi - 110006" },
+    { name: "IFFCO Chowk Terminal", city: "Gurugram", address: "IFFCO Chowk, NH 48, Gurugram, Haryana - 122001" },
+    { name: "Sindhi Camp Bus Terminal", city: "Jaipur", address: "Station Road, Sindhi Camp, Jaipur, Rajasthan - 302001" },
+    { name: "Majestic Kempegowda Bus Station", city: "Bengaluru", address: "Gubbi Thotadappa Rd, Majestic, Bengaluru, Karnataka - 560009" },
+    { name: "Electronic City Toll Gate", city: "Bengaluru", address: "Hosur Road, Electronic City, Bengaluru - 560100" },
+    { name: "Koyambedu CMBT", city: "Chennai", address: "Chennai Mofussil Bus Terminus, Koyambedu, Chennai, Tamil Nadu - 600107" },
+    { name: "Sriperumbudur Toll Bypass", city: "Chennai", address: "Chennai-Bengaluru Highway, Sriperumbudur - 602105" },
+    { name: "Borivali West Gokul Hotel", city: "Mumbai", address: "Western Express Highway, Borivali, Mumbai, Maharashtra - 400066" },
+    { name: "Vashi Plaza Toll", city: "Navi Mumbai", address: "Sion-Panvel Expressway, Vashi, Navi Mumbai - 400703" },
+    { name: "Swargate Bus Stand", city: "Pune", address: "Swargate, Pune, Maharashtra - 411042" },
+    { name: "Wakad Hinjewadi Bridge", city: "Pune", address: "Mumbai-Pune Bypass, Wakad, Pune - 411057" },
+    { name: "MGBS Central Bus Station", city: "Hyderabad", address: "Imlibun, Gowliguda, Hyderabad, Telangana - 500012" },
+    { name: "Gachibowli Outer Ring Road", city: "Hyderabad", address: "Gachibowli Junction, Hyderabad - 500032" },
+    { name: "Pandit Nehru Bus Station", city: "Vijayawada", address: "Autonagar, Vijayawada, Andhra Pradesh - 520013" },
+    { name: "Panaji Kadamba Bus Terminal", city: "Goa", address: "KTC Bus Stand, Panaji, Goa - 403001" },
+    { name: "Geeta Mandir Central Bus Terminus", city: "Ahmedabad", address: "Geeta Mandir Road, Ahmedabad, Gujarat - 380022" },
+    { name: "Surat Central Station", city: "Surat", address: "Near Railway Station, Surat, Gujarat - 395003" },
+    { name: "Private Luxury Bus Stand", city: "Manali", address: "The Mall Road, Manali, Himachal Pradesh - 175131" },
   ];
 
   const stopMap: Record<string, string> = {};
@@ -276,17 +276,18 @@ async function main() {
     stopMap[s.city] = stop.id;
   }
 
+  // 7. Indian Routes with Distance (km) and Durations (minutes)
   const routeConfigs = [
-    { source: "New York", destination: "Boston", distance: 350.0, estimatedDuration: 270, stops: ["New York", "Hartford", "Boston"] },
-    { source: "Boston", destination: "New York", distance: 350.0, estimatedDuration: 270, stops: ["Boston", "Hartford", "New York"] },
-    { source: "Los Angeles", destination: "San Francisco", distance: 615.0, estimatedDuration: 420, stops: ["Los Angeles", "Bakersfield", "San Francisco"] },
-    { source: "San Francisco", destination: "Los Angeles", distance: 615.0, estimatedDuration: 420, stops: ["San Francisco", "Bakersfield", "Los Angeles"] },
-    { source: "Seattle", destination: "Portland", distance: 280.0, estimatedDuration: 210, stops: ["Seattle", "Tacoma", "Portland"] },
-    { source: "Portland", destination: "Seattle", distance: 280.0, estimatedDuration: 210, stops: ["Portland", "Tacoma", "Seattle"] },
-    { source: "Chicago", destination: "Detroit", distance: 450.0, estimatedDuration: 330, stops: ["Chicago", "Detroit"] },
-    { source: "Washington DC", destination: "Philadelphia", distance: 225.0, estimatedDuration: 160, stops: ["Washington DC", "Philadelphia"] },
-    { source: "Dallas", destination: "Houston", distance: 385.0, estimatedDuration: 240, stops: ["Dallas", "Houston"] },
-    { source: "Miami", destination: "Orlando", distance: 380.0, estimatedDuration: 230, stops: ["Miami", "Orlando"] },
+    { source: "Delhi", destination: "Jaipur", distance: 280.0, estimatedDuration: 300, stops: ["Delhi", "Gurugram", "Jaipur"] },
+    { source: "Jaipur", destination: "Delhi", distance: 280.0, estimatedDuration: 300, stops: ["Jaipur", "Gurugram", "Delhi"] },
+    { source: "Bengaluru", destination: "Chennai", distance: 350.0, estimatedDuration: 360, stops: ["Bengaluru", "Chennai"] },
+    { source: "Chennai", destination: "Bengaluru", distance: 350.0, estimatedDuration: 360, stops: ["Chennai", "Bengaluru"] },
+    { source: "Mumbai", destination: "Pune", distance: 155.0, estimatedDuration: 180, stops: ["Mumbai", "Navi Mumbai", "Pune"] },
+    { source: "Pune", destination: "Mumbai", distance: 155.0, estimatedDuration: 180, stops: ["Pune", "Navi Mumbai", "Mumbai"] },
+    { source: "Hyderabad", destination: "Vijayawada", distance: 275.0, estimatedDuration: 300, stops: ["Hyderabad", "Vijayawada"] },
+    { source: "Mumbai", destination: "Goa", distance: 580.0, estimatedDuration: 660, stops: ["Mumbai", "Pune", "Goa"] },
+    { source: "Ahmedabad", destination: "Surat", distance: 260.0, estimatedDuration: 270, stops: ["Ahmedabad", "Surat"] },
+    { source: "Delhi", destination: "Manali", distance: 540.0, estimatedDuration: 720, stops: ["Delhi", "Manali"] },
   ];
 
   const createdRoutes = [];
@@ -308,7 +309,7 @@ async function main() {
       const isLast = idx === rc.stops.length - 1;
       const fraction = idx / (rc.stops.length - 1 || 1);
       const arrOffset = Math.round(rc.estimatedDuration * fraction);
-      const depOffset = isLast ? arrOffset : arrOffset + (isFirst ? 0 : 15);
+      const depOffset = isLast ? arrOffset : arrOffset + (isFirst ? 0 : 20);
 
       await prisma.routeStop.create({
         data: {
@@ -322,42 +323,42 @@ async function main() {
     }
   }
 
-  console.log(`✅ Seeded ${createdRoutes.length} Routes with intermediate stops`);
+  console.log(`✅ Seeded ${createdRoutes.length} Indian Highway Routes with intermediate station stops`);
 
-  // 7. Scheduled Trips (At least 20 trips across today, tomorrow, and future days)
+  // 8. Scheduled Trips with Indian Rupee (INR - ₹) Fares
   const baseTime = new Date();
   baseTime.setMinutes(0, 0, 0);
 
   const tripConfigs = [
-    // Today trips (morning, afternoon, night)
-    { routeIndex: 0, busIndex: 0, hoursOffset: 2, fare: 48.0 },
-    { routeIndex: 0, busIndex: 1, hoursOffset: 8, fare: 65.0 },
-    { routeIndex: 1, busIndex: 2, hoursOffset: 4, fare: 42.0 },
-    { routeIndex: 2, busIndex: 3, hoursOffset: 3, fare: 75.0 },
-    { routeIndex: 2, busIndex: 4, hoursOffset: 12, fare: 85.0 },
-    { routeIndex: 3, busIndex: 3, hoursOffset: 6, fare: 75.0 },
-    { routeIndex: 4, busIndex: 5, hoursOffset: 2, fare: 35.0 },
-    { routeIndex: 5, busIndex: 5, hoursOffset: 7, fare: 35.0 },
-    { routeIndex: 6, busIndex: 8, hoursOffset: 5, fare: 52.0 },
-    { routeIndex: 7, busIndex: 9, hoursOffset: 3, fare: 32.0 },
+    // Today trips (morning, afternoon, overnight sleeper)
+    { routeIndex: 0, busIndex: 0, hoursOffset: 2, fare: 650.0 },   // Delhi -> Jaipur Volvo
+    { routeIndex: 0, busIndex: 1, hoursOffset: 8, fare: 850.0 },   // Delhi -> Jaipur Sleeper
+    { routeIndex: 1, busIndex: 2, hoursOffset: 4, fare: 600.0 },   // Jaipur -> Delhi Seater
+    { routeIndex: 2, busIndex: 3, hoursOffset: 3, fare: 950.0 },   // Blr -> Chn Volvo
+    { routeIndex: 2, busIndex: 4, hoursOffset: 12, fare: 1200.0 }, // Blr -> Chn Sleeper
+    { routeIndex: 3, busIndex: 3, hoursOffset: 6, fare: 950.0 },   // Chn -> Blr Volvo
+    { routeIndex: 4, busIndex: 5, hoursOffset: 2, fare: 450.0 },   // Mum -> Pune Seater
+    { routeIndex: 5, busIndex: 5, hoursOffset: 7, fare: 450.0 },   // Pune -> Mum Seater
+    { routeIndex: 6, busIndex: 8, hoursOffset: 5, fare: 750.0 },   // Hyd -> Vij Seater
+    { routeIndex: 7, busIndex: 9, hoursOffset: 10, fare: 1450.0 }, // Mum -> Goa Sleeper
 
     // Tomorrow trips
-    { routeIndex: 0, busIndex: 0, hoursOffset: 24, fare: 50.0 },
-    { routeIndex: 0, busIndex: 1, hoursOffset: 32, fare: 68.0 },
-    { routeIndex: 1, busIndex: 2, hoursOffset: 28, fare: 45.0 },
-    { routeIndex: 2, busIndex: 4, hoursOffset: 26, fare: 88.0 },
-    { routeIndex: 3, busIndex: 3, hoursOffset: 30, fare: 78.0 },
-    { routeIndex: 4, busIndex: 5, hoursOffset: 25, fare: 36.0 },
-    { routeIndex: 8, busIndex: 6, hoursOffset: 27, fare: 48.0 },
-    { routeIndex: 9, busIndex: 7, hoursOffset: 29, fare: 55.0 },
+    { routeIndex: 0, busIndex: 0, hoursOffset: 24, fare: 700.0 },
+    { routeIndex: 0, busIndex: 1, hoursOffset: 32, fare: 900.0 },
+    { routeIndex: 1, busIndex: 2, hoursOffset: 28, fare: 650.0 },
+    { routeIndex: 2, busIndex: 4, hoursOffset: 26, fare: 1250.0 },
+    { routeIndex: 3, busIndex: 3, hoursOffset: 30, fare: 1000.0 },
+    { routeIndex: 4, busIndex: 5, hoursOffset: 25, fare: 480.0 },
+    { routeIndex: 8, busIndex: 6, hoursOffset: 27, fare: 600.0 },  // Ahd -> Surat
+    { routeIndex: 9, busIndex: 7, hoursOffset: 29, fare: 1650.0 }, // Delhi -> Manali Sleeper
 
     // Day after tomorrow trips
-    { routeIndex: 0, busIndex: 0, hoursOffset: 48, fare: 52.0 },
-    { routeIndex: 1, busIndex: 1, hoursOffset: 52, fare: 70.0 },
-    { routeIndex: 2, busIndex: 3, hoursOffset: 50, fare: 80.0 },
-    { routeIndex: 6, busIndex: 8, hoursOffset: 54, fare: 55.0 },
-    { routeIndex: 7, busIndex: 9, hoursOffset: 49, fare: 34.0 },
-    { routeIndex: 8, busIndex: 6, hoursOffset: 51, fare: 50.0 },
+    { routeIndex: 0, busIndex: 0, hoursOffset: 48, fare: 720.0 },
+    { routeIndex: 1, busIndex: 1, hoursOffset: 52, fare: 920.0 },
+    { routeIndex: 2, busIndex: 3, hoursOffset: 50, fare: 1050.0 },
+    { routeIndex: 6, busIndex: 8, hoursOffset: 54, fare: 800.0 },
+    { routeIndex: 7, busIndex: 9, hoursOffset: 49, fare: 1550.0 },
+    { routeIndex: 8, busIndex: 6, hoursOffset: 51, fare: 620.0 },
   ];
 
   const createdTrips = [];
@@ -392,10 +393,9 @@ async function main() {
     await prisma.tripSeat.createMany({ data: tripSeatData });
   }
 
-  console.log(`✅ Seeded ${createdTrips.length} Trips with full TripSeat availability inventory`);
+  console.log(`✅ Seeded ${createdTrips.length} Indian Intercity Trips with base fares in ₹ INR`);
 
-  // 8. Sample Confirmed Bookings for demonstration
-  // Let's create an existing confirmed booking for customer1 on Trip 0
+  // 9. Sample Confirmed Booking for demonstration
   const tripToBook = createdTrips[0];
   const tripSeatsToBook = await prisma.tripSeat.findMany({
     where: { tripId: tripToBook.id },
@@ -406,7 +406,7 @@ async function main() {
   if (tripSeatsToBook.length >= 2) {
     const booking = await prisma.booking.create({
       data: {
-        pnr: "PNR-NYB-849201",
+        pnr: "PNR-DEL-984210",
         userId: customer1.id,
         tripId: tripToBook.id,
         totalAmount: tripToBook.baseFare * 2,
@@ -414,8 +414,8 @@ async function main() {
         bookingDate: new Date(),
         passengers: {
           create: [
-            { fullName: "John Doe", age: 32, gender: "MALE", phone: "+1-555-0201" },
-            { fullName: "Sarah Doe", age: 29, gender: "FEMALE", phone: "+1-555-0203" },
+            { fullName: "Aarav Patel", age: 31, gender: "MALE", phone: "+91 98765 43210" },
+            { fullName: "Neha Patel", age: 28, gender: "FEMALE", phone: "+91 98765 43212" },
           ],
         },
         bookingSeats: {
@@ -443,10 +443,10 @@ async function main() {
       },
     });
 
-    console.log(`✅ Seeded sample booking with PNR: ${booking.pnr}`);
+    console.log(`✅ Seeded sample booking with Indian PNR: ${booking.pnr} (Total: ₹${booking.totalAmount})`);
   }
 
-  console.log("🚀 Database seeding finished successfully!");
+  console.log("🚀 Indian Transit database seeding finished successfully!");
 }
 
 main()

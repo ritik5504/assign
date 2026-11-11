@@ -23,3 +23,4 @@ export async function GET() {
     return NextResponse.json({ success: false, error: "Unauthorized or failed to fetch occupancy" }, { status: 403 });
   }
 }
+

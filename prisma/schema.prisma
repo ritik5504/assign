@@ -311,3 +311,4 @@ model AuditLog {
   @@index([entityType, entityId])
   @@index([createdAt])
 }
+

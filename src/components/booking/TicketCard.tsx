@@ -234,3 +234,4 @@ export function TicketCard({ booking }: { booking: TicketData }) {
     </div>
   );
 }
+

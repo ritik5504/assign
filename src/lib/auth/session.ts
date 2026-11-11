@@ -26,3 +26,4 @@ export async function requireRole(allowedRoles: Role[]): Promise<SessionUser> {
   }
   return session;
 }
+

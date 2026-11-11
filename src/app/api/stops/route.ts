@@ -51,3 +51,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, error: "Failed to create stop" }, { status: 500 });
   }
 }
+

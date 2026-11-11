@@ -27,3 +27,4 @@ export async function generateUniquePNR(): Promise<string> {
   const timestampHex = Date.now().toString(36).toUpperCase();
   return `PNR-${yearMonth}-${timestampHex}`;
 }
+

@@ -94,3 +94,4 @@ export const operatorSchema = z.object({
   contactDetails: z.string().min(5).max(200),
   status: z.nativeEnum(OperatorStatus).default(OperatorStatus.ACTIVE),
 });
+
