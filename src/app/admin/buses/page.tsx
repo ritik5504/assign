@@ -262,7 +262,7 @@ export default function BusManagementPage() {
                   <label className="text-xs font-bold text-slate-700">Registration Number</label>
                   <Input
                     required
-                    placeholder="DL-01-AB-1234"
+                    placeholder="US-CA-9021"
                     value={registrationNumber}
                     onChange={(e) => setRegistrationNumber(e.target.value)}
                   />
@@ -271,7 +271,7 @@ export default function BusManagementPage() {
                   <label className="text-xs font-bold text-slate-700">Bus Name / Label</label>
                   <Input
                     required
-                    placeholder="Garuda Volvo 9600"
+                    placeholder="Pacific Star Liner"
                     value={busName}
                     onChange={(e) => setBusName(e.target.value)}
                   />

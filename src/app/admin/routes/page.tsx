@@ -20,8 +20,8 @@ export default function RouteManagementPage() {
   const [showAddRoute, setShowAddRoute] = useState(false);
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
-  const [distance, setDistance] = useState("280");
-  const [estimatedDuration, setEstimatedDuration] = useState("300");
+  const [distance, setDistance] = useState("350");
+  const [estimatedDuration, setEstimatedDuration] = useState("270");
   const [submittingRoute, setSubmittingRoute] = useState(false);
   const [routeError, setRouteError] = useState<string | null>(null);
 
@@ -235,7 +235,7 @@ export default function RouteManagementPage() {
                   <label className="text-xs font-bold text-slate-700">Origin City</label>
                   <Input
                     required
-                    placeholder="Delhi"
+                    placeholder="New York"
                     value={source}
                     onChange={(e) => setSource(e.target.value)}
                   />
@@ -244,7 +244,7 @@ export default function RouteManagementPage() {
                   <label className="text-xs font-bold text-slate-700">Destination City</label>
                   <Input
                     required
-                    placeholder="Jaipur"
+                    placeholder="Boston"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
                   />

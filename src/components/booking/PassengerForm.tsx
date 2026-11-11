@@ -29,7 +29,7 @@ export function PassengerForm({
       <div className="border-b border-slate-200 pb-3">
         <h3 className="text-lg font-bold text-slate-900">Passenger Information</h3>
         <p className="text-xs text-slate-500">
-          Enter passenger details matching Aadhaar / Voter ID / Govt ID for conductor verification.
+          Enter passenger details matching government-issued ID for check-in verification.
         </p>
       </div>
 
@@ -49,7 +49,7 @@ export function PassengerForm({
                   Passenger {index + 1}
                 </span>
                 <span className="rounded-md bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
-                  Seat / Berth: {seatNum}
+                  Seat: {seatNum}
                 </span>
               </div>
 
@@ -60,7 +60,7 @@ export function PassengerForm({
                     Full Legal Name <span className="text-rose-500">*</span>
                   </label>
                   <Input
-                    placeholder="e.g. Rahul Sharma"
+                    placeholder="e.g. Jane Doe"
                     value={passenger.fullName}
                     onChange={(e) => onChange(index, "fullName", e.target.value)}
                     className={errors[`${errPrefix}_fullName`] ? "border-rose-500" : ""}
@@ -109,10 +109,10 @@ export function PassengerForm({
 
                 {/* Phone */}
                 <div className="sm:col-span-3 space-y-1">
-                  <label className="text-xs font-semibold text-slate-700">Mobile (+91)</label>
+                  <label className="text-xs font-semibold text-slate-700">Phone (Optional)</label>
                   <div className="relative">
                     <Input
-                      placeholder="+91 98765 43210"
+                      placeholder="+1-555-0199"
                       value={passenger.phone || ""}
                       onChange={(e) => onChange(index, "phone", e.target.value)}
                     />
@@ -126,3 +126,4 @@ export function PassengerForm({
     </div>
   );
 }
+

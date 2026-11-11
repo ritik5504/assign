@@ -50,10 +50,10 @@ export default function RegisterPage() {
           <div className="h-10 w-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shadow-md shadow-emerald-700/20">
             <Bus className="h-5 w-5" />
           </div>
-          <span className="text-2xl font-black tracking-tight text-slate-900">SwiftTransit India</span>
+          <span className="text-2xl font-black tracking-tight text-slate-900">SwiftTransit</span>
         </Link>
         <h2 className="mt-4 text-xl font-bold tracking-tight text-slate-900">
-          Create Passenger Account
+          Create passenger account
         </h2>
         <p className="text-xs text-slate-500 mt-1">
           Already registered?{" "}
@@ -78,7 +78,7 @@ export default function RegisterPage() {
               <Input
                 type="text"
                 required
-                placeholder="Rahul Verma"
+                placeholder="Jane Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -89,7 +89,7 @@ export default function RegisterPage() {
               <Input
                 type="email"
                 required
-                placeholder="rahul.verma@example.com"
+                placeholder="jane@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -99,7 +99,7 @@ export default function RegisterPage() {
               <label className="text-xs font-bold text-slate-700">Mobile Phone</label>
               <Input
                 type="tel"
-                placeholder="+91 98765 43210"
+                placeholder="+1 (555) 019-2834"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -125,3 +125,4 @@ export default function RegisterPage() {
     </div>
   );
 }
+
