@@ -32,18 +32,18 @@ export function SeatLayout({
     const isLocked = seat.status === "LOCKED";
     const isAvailable = seat.status === "AVAILABLE";
 
-    let stateClasses = "border-slate-300 bg-white text-slate-800 hover:border-emerald-500 hover:bg-emerald-50 cursor-pointer";
+    let stateClasses = "border-slate-300 bg-white text-slate-800 hover:border-emerald-500 hover:bg-emerald-50 hover:scale-105 active:scale-95 cursor-pointer shadow-sm";
     let icon = null;
 
     if (isBooked) {
       stateClasses = "border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed opacity-60";
       icon = <Ban className="h-3 w-3 text-slate-400" />;
     } else if (isLocked && !isSelected) {
-      stateClasses = "border-amber-300 bg-amber-50 text-amber-700 cursor-not-allowed";
+      stateClasses = "border-amber-300 bg-amber-50 text-amber-700 cursor-not-allowed animate-pulse";
       icon = <Lock className="h-3 w-3 text-amber-600" />;
     } else if (isSelected) {
-      stateClasses = "border-emerald-600 bg-emerald-600 text-white shadow-md shadow-emerald-600/30 font-bold";
-      icon = <Check className="h-3.5 w-3.5 text-white" />;
+      stateClasses = "border-emerald-600 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white shadow-lg shadow-emerald-600/40 font-bold scale-105 ring-2 ring-emerald-300";
+      icon = <Check className="h-3.5 w-3.5 text-white animate-bounce" />;
     }
 
     const isWindow = seat.seatType === "WINDOW";

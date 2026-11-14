@@ -27,7 +27,9 @@ export function TripCard({ trip }: TripCardProps) {
   const isLowSeats = trip.availableSeatsCount <= 5;
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all p-5">
+    <div className="group rounded-2xl border border-slate-200/90 bg-white shadow-sm hover:shadow-xl hover:border-emerald-400 transition-all duration-300 p-6 relative overflow-hidden">
+      {/* Decorative top accent gradient on hover */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity" />
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         {/* Operator & Bus Details */}
         <div className="space-y-2 lg:w-1/4">
@@ -62,10 +64,12 @@ export function TripCard({ trip }: TripCardProps) {
               <Clock className="h-3 w-3 text-slate-400" />
               <span>{formatDuration(trip.estimatedDuration)}</span>
             </div>
-            <div className="relative w-full my-1.5 flex items-center">
-              <div className="h-0.5 w-full bg-slate-200" />
-              <div className="absolute left-0 h-2 w-2 rounded-full bg-emerald-500" />
-              <div className="absolute right-0 h-2 w-2 rounded-full bg-emerald-600" />
+            <div className="relative w-full my-2 flex items-center">
+              <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+                <div className="h-full w-full bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 rounded-full" />
+              </div>
+              <div className="absolute left-0 h-3 w-3 rounded-full bg-emerald-600 ring-4 ring-emerald-100" />
+              <div className="absolute right-0 h-3 w-3 rounded-full bg-teal-600 ring-4 ring-teal-100" />
             </div>
             {trip.stops.length > 2 ? (
               <button
@@ -109,7 +113,7 @@ export function TripCard({ trip }: TripCardProps) {
 
           <Link href={`/booking/${trip.id}`} className="w-full sm:w-auto">
             <Button
-              className="w-full font-bold shadow-md shadow-emerald-700/20"
+              className="w-full font-extrabold shadow-md shadow-emerald-700/20 hover:scale-105 active:scale-95 transition-all bg-emerald-600 hover:bg-emerald-700"
               disabled={trip.availableSeatsCount === 0}
             >
               {trip.availableSeatsCount === 0 ? "Sold Out" : "Select Seats"}
