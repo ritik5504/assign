@@ -21,33 +21,37 @@ import {
 import { Button } from "@/components/ui/button";
 
 const POPULAR_ROUTES = [
-  { source: "New York", destination: "Boston", price: 48, time: "4h 30m", busType: "Luxury Volvo" },
-  { source: "Los Angeles", destination: "San Francisco", price: 75, time: "7h 00m", busType: "Royal Sleeper" },
-  { source: "Seattle", destination: "Portland", price: 35, time: "3h 30m", busType: "Sound Runner" },
-  { source: "Miami", destination: "Orlando", price: 55, time: "3h 50m", busType: "Sunshine Dreamer" },
+  { source: "Mumbai", destination: "Pune", price: 850, time: "3h 00m", busType: "Sharma Falcon Volvo" },
+  { source: "Bangalore", destination: "Mysore", price: 950, time: "2h 30m", busType: "Patel Star Sleeper" },
+  { source: "Chennai", destination: "Coimbatore", price: 500, time: "7h 00m", busType: "Patel Night Rider" },
+  { source: "Delhi", destination: "Jaipur", price: 1100, time: "5h 00m", busType: "VRL Mysore King" },
 ];
 
 const CITIES = [
-  "New York",
-  "Boston",
-  "Los Angeles",
-  "San Francisco",
-  "Seattle",
-  "Portland",
-  "Chicago",
-  "Detroit",
-  "Washington DC",
-  "Philadelphia",
-  "Dallas",
-  "Houston",
-  "Miami",
-  "Orlando",
+  "Mumbai",
+  "Pune",
+  "Nashik",
+  "Aurangabad",
+  "Bangalore",
+  "Mysore",
+  "Hubli",
+  "Chennai",
+  "Coimbatore",
+  "Madurai",
+  "Hyderabad",
+  "Vijayawada",
+  "Delhi",
+  "Jaipur",
+  "Agra",
+  "Lucknow",
+  "Kolkata",
+  "Bhubaneswar",
 ];
 
 export default function HomePage() {
   const router = useRouter();
-  const [source, setSource] = useState("New York");
-  const [destination, setDestination] = useState("Boston");
+  const [source, setSource] = useState("Mumbai");
+  const [destination, setDestination] = useState("Pune");
   const [date, setDate] = useState(() => {
     const today = new Date();
     return today.toISOString().split("T")[0];
@@ -218,7 +222,7 @@ export default function HomePage() {
               <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-slate-400">Fares from</span>
-                  <p className="text-xl font-black text-slate-900">${route.price}</p>
+                  <p className="text-xl font-black text-slate-900">₹{route.price}</p>
                 </div>
                 <div className="h-8 w-8 rounded-full bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white flex items-center justify-center transition-colors">
                   <ArrowRight className="h-4 w-4" />
@@ -290,7 +294,7 @@ export default function HomePage() {
         <div className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 overflow-hidden relative">
           <div className="relative z-10 max-w-2xl space-y-6">
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
-              Why 100,000+ passengers rely on SwiftTransit every month
+              Why 10,00,000+ passengers rely on SwiftTransit every month
             </h2>
             <div className="space-y-4 text-sm text-slate-300">
               <div className="flex items-start gap-3">

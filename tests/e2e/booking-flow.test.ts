@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll } from "vitest";
 import { prisma } from "@/lib/prisma/client";
-import { createBooking, lockSeats } from "@/services/booking.service";
+import { createBooking, lockSeats, cleanExpiredLocks } from "@/services/booking.service";
 import { cancelBooking } from "@/services/cancellation.service";
 import { getAdminOverviewMetrics } from "@/services/report.service";
 import bcrypt from "bcryptjs";
@@ -19,26 +19,26 @@ describe("E2E Critical Flow: Search -> Lock -> Booking -> Manifest -> Report -> 
     // 1. Snapshot initial admin metrics
     initialMetrics = await getAdminOverviewMetrics();
 
-    // 2. Register a dedicated Indian test customer
+    // 2. Register a dedicated test customer
     const passwordHash = await bcrypt.hash("Password@123", 10);
-    const uniqueEmail = `e2e_aarav_${Date.now()}@example.com`;
+    const uniqueEmail = `e2e_customer_${Date.now()}@example.com`;
     const user = await prisma.user.create({
       data: {
-        name: "Aarav E2E Passenger",
+        name: "E2E Explorer",
         email: uniqueEmail,
         passwordHash,
-        phone: "+91 98765 99881",
+        phone: "+1-555-9988",
         role: Role.CUSTOMER,
       },
     });
     e2eUser = { id: user.id, email: user.email, name: user.name };
 
-    // 3. Find an active scheduled trip from Delhi to Jaipur
+    // 3. Find an active scheduled trip from Mumbai to Pune (offset 48 hours out to guarantee > 24 hours refund tier of 90%)
     const trip = await prisma.trip.findFirst({
       where: {
         status: "SCHEDULED",
-        route: { source: "Delhi", destination: "Jaipur" },
-        departureDateTime: { gt: new Date(Date.now() + 10 * 60 * 60 * 1000) },
+        route: { source: "Mumbai", destination: "Pune" },
+        departureDateTime: { gt: new Date(Date.now() + 36 * 60 * 60 * 1000) },
       },
       include: {
         tripSeats: {
@@ -50,7 +50,7 @@ describe("E2E Critical Flow: Search -> Lock -> Booking -> Manifest -> Report -> 
     });
 
     if (!trip || trip.tripSeats.length < 2) {
-      throw new Error("E2E requires a seeded Indian trip with at least 2 available seats");
+      throw new Error("E2E requires a seeded trip with at least 2 available seats");
     }
 
     tripId = trip.id;
@@ -81,19 +81,19 @@ describe("E2E Critical Flow: Search -> Lock -> Booking -> Manifest -> Report -> 
       seatIds: [seatIdA, seatIdB],
       passengers: [
         {
-          fullName: "Aarav E2E Passenger",
+          fullName: "E2E Passenger One",
           age: 32,
           gender: "MALE",
-          phone: "+91 98765 99881",
+          phone: "+1-555-9988",
         },
         {
-          fullName: "Ananya E2E Passenger",
+          fullName: "E2E Passenger Two",
           age: 28,
           gender: "FEMALE",
-          phone: "+91 98765 99882",
+          phone: "+1-555-9989",
         },
       ],
-      idempotencyKey: `idemp_e2e_${Date.now()}`,
+      idempotencyKey: `idemp_${Date.now()}`,
     });
 
     expect(booking).toBeDefined();
@@ -131,9 +131,9 @@ describe("E2E Critical Flow: Search -> Lock -> Booking -> Manifest -> Report -> 
 
     expect(ticket).toBeDefined();
     expect(ticket?.pnr).toBe(confirmedPNR);
-    expect(ticket?.trip.route.source).toBe("Delhi");
-    expect(ticket?.trip.route.destination).toBe("Jaipur");
-    expect(ticket?.passengers.map((p) => p.fullName)).toContain("Aarav E2E Passenger");
+    expect(ticket?.trip.route.source).toBe("Mumbai");
+    expect(ticket?.trip.route.destination).toBe("Pune");
+    expect(ticket?.passengers.map((p) => p.fullName)).toContain("E2E Passenger One");
   });
 
   it("Step 4: Operator Trip Manifest reflects newly booked passengers with correct seats", async () => {
@@ -154,7 +154,7 @@ describe("E2E Critical Flow: Search -> Lock -> Booking -> Manifest -> Report -> 
 
     const allManifestPassengers = manifestTrip!.bookings.flatMap((b) => b.passengers);
     const foundE2EPassenger = allManifestPassengers.find(
-      (p) => p.fullName === "Aarav E2E Passenger"
+      (p) => p.fullName === "E2E Passenger One"
     );
     expect(foundE2EPassenger).toBeDefined();
   });
@@ -165,7 +165,7 @@ describe("E2E Critical Flow: Search -> Lock -> Booking -> Manifest -> Report -> 
     expect(updatedMetrics.totalRevenue).toBeGreaterThan(initialMetrics.totalRevenue);
   });
 
-  it("Step 6: Customer cancels booking, receives refund, and seats return to AVAILABLE", async () => {
+  it("Step 6: Customer cancels booking, receives 90% refund, and seats return to AVAILABLE", async () => {
     const cancelResult = await cancelBooking({
       bookingId,
       userId: e2eUser.id,
@@ -174,6 +174,7 @@ describe("E2E Critical Flow: Search -> Lock -> Booking -> Manifest -> Report -> 
     });
 
     expect(cancelResult.booking.status).toBe(BookingStatus.CANCELLED);
+    expect(cancelResult.refundDetails.refundPercentage).toBe(90.0);
     expect(cancelResult.cancellation.refundAmount).toBeGreaterThan(0);
 
     // Verify seats transitioned back to AVAILABLE in inventory

@@ -153,7 +153,7 @@ export default function OperatorManagementPage() {
                 <label className="text-xs font-bold text-slate-700">Contact Details & Phone</label>
                 <Input
                   required
-                  placeholder="e.g. support@zenith.com | +1-800-555-0199"
+                  placeholder="e.g. support@sharmatravels.in | 1800-123-7001"
                   value={contactDetails}
                   onChange={(e) => setContactDetails(e.target.value)}
                 />

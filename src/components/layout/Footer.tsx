@@ -35,23 +35,23 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/search?source=New+York&destination=Boston" className="hover:text-emerald-400 transition-colors">
-                  New York → Boston Express
+                <Link href="/search?source=Mumbai&destination=Pune" className="hover:text-emerald-400 transition-colors">
+                  Mumbai → Pune Express
                 </Link>
               </li>
               <li>
-                <Link href="/search?source=Los+Angeles&destination=San+Francisco" className="hover:text-emerald-400 transition-colors">
-                  Los Angeles → San Francisco
+                <Link href="/search?source=Bangalore&destination=Mysore" className="hover:text-emerald-400 transition-colors">
+                  Bangalore → Mysore Shuttle
                 </Link>
               </li>
               <li>
-                <Link href="/search?source=Seattle&destination=Portland" className="hover:text-emerald-400 transition-colors">
-                  Seattle → Portland Shuttle
+                <Link href="/search?source=Chennai&destination=Coimbatore" className="hover:text-emerald-400 transition-colors">
+                  Chennai → Coimbatore Cruiser
                 </Link>
               </li>
               <li>
-                <Link href="/search?source=Miami&destination=Orlando" className="hover:text-emerald-400 transition-colors">
-                  Miami → Orlando Cruiser
+                <Link href="/search?source=Delhi&destination=Jaipur" className="hover:text-emerald-400 transition-colors">
+                  Delhi → Jaipur Express
                 </Link>
               </li>
             </ul>
@@ -86,22 +86,22 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span>One World Trade Center, Suite 4500, New York, NY 10007</span>
+                <span>No. 1, MG Road, Bengaluru - 560001, Karnataka, India</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-emerald-400 shrink-0" />
-                <span>+1 (800) 555-SWIFT (Toll-Free)</span>
+                <span>1800-123-4567 (Toll-Free)</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-emerald-400 shrink-0" />
-                <span>dispatch@swifttransit.com</span>
+                <span>dispatch@swifttransit.in</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} SwiftTransit Systems Inc. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} SwiftTransit Systems Pvt. Ltd. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span>Privacy Policy</span>
             <span>Terms of Carriage</span>

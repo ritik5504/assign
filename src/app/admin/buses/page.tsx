@@ -262,7 +262,7 @@ export default function BusManagementPage() {
                   <label className="text-xs font-bold text-slate-700">Registration Number</label>
                   <Input
                     required
-                    placeholder="US-CA-9021"
+                    placeholder="MH-12-AB-1234"
                     value={registrationNumber}
                     onChange={(e) => setRegistrationNumber(e.target.value)}
                   />

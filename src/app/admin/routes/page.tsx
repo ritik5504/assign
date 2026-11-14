@@ -235,7 +235,7 @@ export default function RouteManagementPage() {
                   <label className="text-xs font-bold text-slate-700">Origin City</label>
                   <Input
                     required
-                    placeholder="New York"
+                    placeholder="Mumbai"
                     value={source}
                     onChange={(e) => setSource(e.target.value)}
                   />
@@ -244,7 +244,7 @@ export default function RouteManagementPage() {
                   <label className="text-xs font-bold text-slate-700">Destination City</label>
                   <Input
                     required
-                    placeholder="Boston"
+                    placeholder="Pune"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
                   />

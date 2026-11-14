@@ -403,12 +403,12 @@ pnpm prisma:seed
 ```
 
 This seeds:
-- 1 Super Admin (`admin@busbooking.com`)
-- 2 Operators (`operator1@busbooking.com`, `operator2@busbooking.com`)
-- 2 Customers (`john@example.com`, `jane@example.com`)
-- 3 Bus Transit Companies (Apex Express, BlueSky Lines, Voyager Coaches)
+- 1 Super Admin (`admin@swifttransit.in`)
+- 2 Operators (`operator1@swifttransit.in`, `operator2@swifttransit.in`)
+- 2 Customers (`rahul@example.com`, `priya@example.com`)
+- 3 Bus Transit Companies (Sharma Travels Pvt. Ltd., Patel Express Motors, VRL Travels)
 - 10 Configured Buses with full seat layouts
-- 10 Active Intercity Routes with 18 intermediate stops
+- 10 Active Intercity Routes (e.g., Mumbai-Pune, Bangalore-Mysore, Delhi-Jaipur) with 18 intermediate stops
 - 24 Scheduled Trips across dates with complete seat availability inventories
 - Active dynamic cancellation policies
 
@@ -483,11 +483,11 @@ For convenience, the login screen provides one-click helper buttons to auto-popu
 
 | Role | Email Address | Password | Permissions |
 | :--- | :--- | :--- | :--- |
-| **Super Admin** | `admin@busbooking.com` | `Admin@123` | Full system access, fleet, trips, revenue reports, audit logs |
-| **Operator** | `operator1@busbooking.com` | `Operator@123` | Fleet dispatch, trip schedules, passenger manifests, CSV exports |
-| **Operator 2** | `operator2@busbooking.com` | `Operator@123` | Assigned fleet dispatch, manifests |
-| **Customer** | `john@example.com` | `Customer@123` | Search, seat booking, ticket download, self-cancellation |
-| **Customer 2** | `jane@example.com` | `Customer@123` | Search, seat booking, personal tickets |
+| **Super Admin** | `admin@swifttransit.in` | `Admin@123` | Full system access, fleet, trips, revenue reports, audit logs |
+| **Operator** | `operator1@swifttransit.in` | `Operator@123` | Fleet dispatch, trip schedules, passenger manifests, CSV exports |
+| **Operator 2** | `operator2@swifttransit.in` | `Operator@123` | Assigned fleet dispatch, manifests |
+| **Customer** | `rahul@example.com` | `Customer@123` | Search, seat booking, ticket download, self-cancellation |
+| **Customer 2** | `priya@example.com` | `Customer@123` | Search, seat booking, personal tickets |
 
 ---
 

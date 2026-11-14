@@ -219,7 +219,7 @@ function SearchContent() {
               <div className="space-y-1">
                 <h3 className="text-base font-bold text-slate-800">No scheduled trips found</h3>
                 <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                  We could not find any buses matching your exact criteria. Try clearing filters or searching for popular routes like New York to Boston.
+                  We could not find any buses matching your exact criteria. Try clearing filters or searching for popular routes like Mumbai to Pune.
                 </p>
               </div>
               <Button

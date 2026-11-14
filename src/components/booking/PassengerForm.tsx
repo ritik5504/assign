@@ -60,7 +60,7 @@ export function PassengerForm({
                     Full Legal Name <span className="text-rose-500">*</span>
                   </label>
                   <Input
-                    placeholder="e.g. Jane Doe"
+                    placeholder="e.g. Rahul Verma"
                     value={passenger.fullName}
                     onChange={(e) => onChange(index, "fullName", e.target.value)}
                     className={errors[`${errPrefix}_fullName`] ? "border-rose-500" : ""}
@@ -112,7 +112,7 @@ export function PassengerForm({
                   <label className="text-xs font-semibold text-slate-700">Phone (Optional)</label>
                   <div className="relative">
                     <Input
-                      placeholder="+1-555-0199"
+                      placeholder="+91-98765-43210"
                       value={passenger.phone || ""}
                       onChange={(e) => onChange(index, "phone", e.target.value)}
                     />

@@ -127,7 +127,7 @@ function LoginContent() {
                 variant="outline"
                 size="sm"
                 className="text-[11px] font-bold"
-                onClick={() => fillCredentials("admin@busbooking.com", "Admin@123")}
+                onClick={() => fillCredentials("admin@swifttransit.in", "Admin@123")}
               >
                 Super Admin
               </Button>
@@ -136,7 +136,7 @@ function LoginContent() {
                 variant="outline"
                 size="sm"
                 className="text-[11px] font-bold"
-                onClick={() => fillCredentials("operator1@busbooking.com", "Operator@123")}
+                onClick={() => fillCredentials("operator1@swifttransit.in", "Operator@123")}
               >
                 Operator
               </Button>
@@ -145,7 +145,7 @@ function LoginContent() {
                 variant="outline"
                 size="sm"
                 className="text-[11px] font-bold"
-                onClick={() => fillCredentials("john@example.com", "Customer@123")}
+                onClick={() => fillCredentials("rahul@example.com", "Customer@123")}
               >
                 Customer
               </Button>
