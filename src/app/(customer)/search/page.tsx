@@ -7,6 +7,27 @@ import { TripCard } from "@/components/booking/TripCard";
 import { Button } from "@/components/ui/button";
 import { Search, SlidersHorizontal, ArrowUpDown, Bus, AlertCircle } from "lucide-react";
 
+const POPULAR_INDIAN_CITIES = [
+  "Mumbai",
+  "Pune",
+  "Nashik",
+  "Aurangabad",
+  "Bangalore",
+  "Mysore",
+  "Hubli",
+  "Chennai",
+  "Coimbatore",
+  "Madurai",
+  "Hyderabad",
+  "Vijayawada",
+  "Delhi",
+  "Jaipur",
+  "Agra",
+  "Lucknow",
+  "Kolkata",
+  "Bhubaneswar",
+];
+
 function SearchContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -22,17 +43,34 @@ function SearchContent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Sync state when URL query params change (e.g. user navigates or clicks route from homepage)
+  useEffect(() => {
+    setSource(searchParams.get("source") || "");
+    setDestination(searchParams.get("destination") || "");
+    setDate(searchParams.get("date") || "");
+    setBusType(searchParams.get("busType") || "ALL");
+    setSortBy(searchParams.get("sortBy") || "departure");
+    setOrder(searchParams.get("order") || "asc");
+  }, [searchParams]);
+
   const fetchTrips = async () => {
     setLoading(true);
     setError(null);
     try {
+      const qSource = searchParams.get("source") || source;
+      const qDest = searchParams.get("destination") || destination;
+      const qDate = searchParams.get("date") || date;
+      const qBusType = searchParams.get("busType") || busType;
+      const qSortBy = searchParams.get("sortBy") || sortBy;
+      const qOrder = searchParams.get("order") || order;
+
       const params = new URLSearchParams();
-      if (source) params.set("source", source);
-      if (destination) params.set("destination", destination);
-      if (date) params.set("date", date);
-      if (busType && busType !== "ALL") params.set("busType", busType);
-      params.set("sortBy", sortBy);
-      params.set("order", order);
+      if (qSource) params.set("source", qSource);
+      if (qDest) params.set("destination", qDest);
+      if (qDate) params.set("date", qDate);
+      if (qBusType && qBusType !== "ALL") params.set("busType", qBusType);
+      params.set("sortBy", qSortBy);
+      params.set("order", qOrder);
 
       const res = await fetch(`/api/trips/search?${params.toString()}`);
       const json = await res.json();
@@ -75,22 +113,34 @@ function SearchContent() {
             <label className="text-xs font-bold text-slate-600">From</label>
             <input
               type="text"
-              placeholder="Source city"
+              list="source-cities"
+              placeholder="Source city (e.g. Mumbai)"
               value={source}
               onChange={(e) => setSource(e.target.value)}
               className="w-full h-10 rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none"
             />
+            <datalist id="source-cities">
+              {POPULAR_INDIAN_CITIES.map((c) => (
+                <option key={c} value={c} />
+              ))}
+            </datalist>
           </div>
 
           <div className="md:col-span-3 space-y-1">
             <label className="text-xs font-bold text-slate-600">To</label>
             <input
               type="text"
-              placeholder="Destination city"
+              list="dest-cities"
+              placeholder="Destination city (e.g. Pune)"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               className="w-full h-10 rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none"
             />
+            <datalist id="dest-cities">
+              {POPULAR_INDIAN_CITIES.map((c) => (
+                <option key={c} value={c} />
+              ))}
+            </datalist>
           </div>
 
           <div className="md:col-span-3 space-y-1">

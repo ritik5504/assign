@@ -20,16 +20,35 @@ export async function GET(req: NextRequest) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const where: any = {
       status: "SCHEDULED",
+      AND: [],
     };
 
-    if (source || destination) {
-      where.route = {};
-      if (source) {
-        where.route.source = { contains: source, mode: "insensitive" };
-      }
-      if (destination) {
-        where.route.destination = { contains: destination, mode: "insensitive" };
-      }
+    if (source) {
+      where.AND.push({
+        route: {
+          OR: [
+            { source: { contains: source, mode: "insensitive" } },
+            { routeStops: { some: { stop: { city: { contains: source, mode: "insensitive" } } } } },
+            { routeStops: { some: { stop: { name: { contains: source, mode: "insensitive" } } } } },
+          ],
+        },
+      });
+    }
+
+    if (destination) {
+      where.AND.push({
+        route: {
+          OR: [
+            { destination: { contains: destination, mode: "insensitive" } },
+            { routeStops: { some: { stop: { city: { contains: destination, mode: "insensitive" } } } } },
+            { routeStops: { some: { stop: { name: { contains: destination, mode: "insensitive" } } } } },
+          ],
+        },
+      });
+    }
+
+    if (where.AND.length === 0) {
+      delete where.AND;
     }
 
     if (busTypeParam && Object.values(BusType).includes(busTypeParam)) {
@@ -37,17 +56,30 @@ export async function GET(req: NextRequest) {
     }
 
     if (dateStr) {
-      const searchDate = new Date(dateStr);
-      if (!isNaN(searchDate.getTime())) {
-        const startOfDay = new Date(searchDate);
-        startOfDay.setHours(0, 0, 0, 0);
-        const endOfDay = new Date(searchDate);
-        endOfDay.setHours(23, 59, 59, 999);
+      // Parse YYYY-MM-DD or standard ISO date string
+      // Allow a generous day window around the date (from UTC start minus 12h to UTC end plus 12h)
+      // to cleanly handle timezone differences between client browser (e.g. IST) and server UTC
+      const dateParts = dateStr.includes("-") ? dateStr.split("-").map(Number) : null;
+      if (dateParts && dateParts.length === 3 && !isNaN(dateParts[0]) && !isNaN(dateParts[1]) && !isNaN(dateParts[2])) {
+        const [year, month, day] = dateParts;
+        const startOfDay = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0) - 12 * 3600 * 1000);
+        const endOfDay = new Date(Date.UTC(year, month - 1, day, 23, 59, 59, 999) + 12 * 3600 * 1000);
 
         where.departureDateTime = {
           gte: startOfDay,
           lte: endOfDay,
         };
+      } else {
+        const searchDate = new Date(dateStr);
+        if (!isNaN(searchDate.getTime())) {
+          const startOfDay = new Date(searchDate.getTime() - 12 * 3600 * 1000);
+          const endOfDay = new Date(searchDate.getTime() + 36 * 3600 * 1000);
+
+          where.departureDateTime = {
+            gte: startOfDay,
+            lte: endOfDay,
+          };
+        }
       }
     }
 

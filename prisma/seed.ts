@@ -287,6 +287,14 @@ async function main() {
     { source: "Vijayawada", destination: "Hyderabad", distance: 275.0, estimatedDuration: 240, stops: ["Vijayawada", "Hyderabad"] },
     { source: "Delhi", destination: "Jaipur", distance: 280.0, estimatedDuration: 300, stops: ["Delhi", "Jaipur"] },
     { source: "Kolkata", destination: "Bhubaneswar", distance: 440.0, estimatedDuration: 360, stops: ["Kolkata", "Bhubaneswar"] },
+    { source: "Mumbai", destination: "Nashik", distance: 170.0, estimatedDuration: 210, stops: ["Mumbai", "Nashik"] },
+    { source: "Nashik", destination: "Pune", distance: 210.0, estimatedDuration: 270, stops: ["Nashik", "Pune"] },
+    { source: "Pune", destination: "Aurangabad", distance: 235.0, estimatedDuration: 300, stops: ["Pune", "Aurangabad"] },
+    { source: "Bangalore", destination: "Hubli", distance: 410.0, estimatedDuration: 390, stops: ["Bangalore", "Hubli"] },
+    { source: "Chennai", destination: "Madurai", distance: 460.0, estimatedDuration: 450, stops: ["Chennai", "Madurai"] },
+    { source: "Delhi", destination: "Agra", distance: 230.0, estimatedDuration: 240, stops: ["Delhi", "Agra"] },
+    { source: "Delhi", destination: "Lucknow", distance: 530.0, estimatedDuration: 480, stops: ["Delhi", "Agra", "Lucknow"] },
+    { source: "Agra", destination: "Jaipur", distance: 240.0, estimatedDuration: 270, stops: ["Agra", "Jaipur"] },
   ];
 
   const createdRoutes = [];
@@ -359,6 +367,26 @@ async function main() {
     { routeIndex: 6, busIndex: 8, hoursOffset: 54, fare: 620.0 },
     { routeIndex: 7, busIndex: 9, hoursOffset: 49, fare: 420.0 },
     { routeIndex: 8, busIndex: 6, hoursOffset: 51, fare: 1150.0 },
+
+    // Additional popular city-pair connections across India
+    { routeIndex: 10, busIndex: 2, hoursOffset: 4, fare: 450.0 },  // Mumbai -> Nashik
+    { routeIndex: 11, busIndex: 0, hoursOffset: 6, fare: 550.0 },  // Nashik -> Pune
+    { routeIndex: 12, busIndex: 1, hoursOffset: 8, fare: 600.0 },  // Pune -> Aurangabad
+    { routeIndex: 13, busIndex: 4, hoursOffset: 5, fare: 850.0 },  // Bangalore -> Hubli
+    { routeIndex: 14, busIndex: 5, hoursOffset: 7, fare: 900.0 },  // Chennai -> Madurai
+    { routeIndex: 15, busIndex: 7, hoursOffset: 3, fare: 500.0 },  // Delhi -> Agra
+    { routeIndex: 16, busIndex: 6, hoursOffset: 10, fare: 1200.0 }, // Delhi -> Lucknow
+    { routeIndex: 17, busIndex: 8, hoursOffset: 4, fare: 550.0 },  // Agra -> Jaipur
+
+    // Next day connections
+    { routeIndex: 10, busIndex: 2, hoursOffset: 28, fare: 450.0 },
+    { routeIndex: 11, busIndex: 0, hoursOffset: 30, fare: 550.0 },
+    { routeIndex: 12, busIndex: 1, hoursOffset: 32, fare: 600.0 },
+    { routeIndex: 13, busIndex: 4, hoursOffset: 29, fare: 850.0 },
+    { routeIndex: 14, busIndex: 5, hoursOffset: 31, fare: 900.0 },
+    { routeIndex: 15, busIndex: 7, hoursOffset: 27, fare: 500.0 },
+    { routeIndex: 16, busIndex: 6, hoursOffset: 34, fare: 1200.0 },
+    { routeIndex: 17, busIndex: 8, hoursOffset: 28, fare: 550.0 },
   ];
 
   const createdTrips = [];
