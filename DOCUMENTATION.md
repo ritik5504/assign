@@ -349,3 +349,4 @@ erDiagram
 3. **Seed Database**: `pnpm prisma:seed`
 4. **Run Vitest Suite**: `pnpm test` (22 unit, integration, and E2E tests)
 5. **Start Dev Server**: `pnpm dev` (http://localhost:3000)
+
